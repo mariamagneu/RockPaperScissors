@@ -47,16 +47,21 @@ document.addEventListener("DOMContentLoaded", function() {
     rockBtn.addEventListener("click", function() {
         getUserChoice = "rock";
         playGame();
+        winEndGame();
     });
 
  scissorsBtn.addEventListener("click", function() {
         getUserChoice = "scissors";
         playGame();
+        winEndGame();
+
     });
 
     paperBtn.addEventListener("click", function() {
         getUserChoice = "paper";
         playGame();
+        winEndGame();
+
     });
 
     function playGame() {
@@ -65,13 +70,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return choices[randomIndex];
         }
         function playRound(playerSelection, computerSelection) {
-            if (usrWins === 5) {
-                rpsGameResult.textContent = "You Won! Congratulations"
-                return rpsGameResult
-            } else if (cptrWins === 5) {
-                rpsGameResult.textContent = "The Computer won. But try again"
-            } else if (playerSelection === computerSelection) {
-                rpsGameResult.textContent = "It's a tie. Nobody wins"; 
+            if (playerSelection === computerSelection) {
+                return "It's a tie. Nobody wins"; 
             } else if (winningCombos[playerSelection] === computerSelection) {
                 return "You won!!!";
             } else {
@@ -81,27 +81,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let playerSelection = getUserChoice;
         let computerSelection = getComputerChoice();
-        let result = playRound(playerSelection, computerSelection);
+        let roundResult = playRound(playerSelection, computerSelection);
 
         cptrSelection.textContent = "Computer chose: " + computerSelection;
         usrSelection.textContent = "You chose: " + playerSelection;
-        rpsRoundResult.textContent = result ;
-        if (result === "You won!!!") {
+
+        rpsRoundResult.textContent = roundResult ;
+
+
+        if (roundResult === "You won!!!") {
             userWins++;
-        } else if (result === "You lost! :(") {
+        } else if (roundResult === "You lost! :(") {
             computerWins++;
         }
-
-        if (userWins === computerWins) {
-            rpsGameResult = "It's a tie.";
-        } else if (userWins > computerWins) {
-            rpsGameResult = "YOU MADE IT! YOU WON THE WHOLE GAME";
+        function winEndGame () {
+        if (userWins === 5) {
+            return "You Won the Game! Congratulations";
+        } else if (computerWins === 5) {
+            return "The Computer wo the Game. But try again";
         } else {
+            return "";
         }
-
+        }
         usrWins.textContent ="User Wins: " + userWins;
         cptrWins.textContent = "Computer Wins: " + computerWins;
+        rpsGameResult.textContent = winEndGame();
+
     }
-
-
+    
 });
