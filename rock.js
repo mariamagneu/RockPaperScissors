@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     rpsOutput.appendChild(rpsRoundResult);
 
     let rpsGameResult = document.createElement("p");
-    rpsOutput.appendChild(cptrSelection);
+    rpsOutput.appendChild(rpsGameResult);
 
     let usrWins = document.createElement ("p");
     rpsOutput.appendChild(usrWins);
@@ -46,21 +46,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     rockBtn.addEventListener("click", function() {
         getUserChoice = "rock";
-        playGame();
-        winEndGame();
+       playGame();
     });
 
  scissorsBtn.addEventListener("click", function() {
         getUserChoice = "scissors";
         playGame();
-        winEndGame();
-
+        
     });
 
     paperBtn.addEventListener("click", function() {
         getUserChoice = "paper";
         playGame();
-        winEndGame();
 
     });
 
@@ -94,19 +91,20 @@ document.addEventListener("DOMContentLoaded", function() {
         } else if (roundResult === "You lost! :(") {
             computerWins++;
         }
-        function winEndGame () {
-        if (userWins === 5) {
-            return "You Won the Game! Congratulations";
-        } else if (computerWins === 5) {
-            return "The Computer wo the Game. But try again";
-        } else {
-            return "";
-        }
-        }
+        
         usrWins.textContent ="User Wins: " + userWins;
         cptrWins.textContent = "Computer Wins: " + computerWins;
         rpsGameResult.textContent = winEndGame();
 
     }
-    
+    function winEndGame() {
+        if (userWins >= 5) {
+            rpsGameResult.textContent = "YOU WON THE WHOLE GAME! CONGRATS"
+            return "YOU WON THE WHOLE GAME! CONGRATS"
+        } else if (computerWins >= 5) {
+            rpsGameResult.textContent = "The computer won this GAME";
+            return "The computer won this GAME";
+
+        }
+        }
 });
