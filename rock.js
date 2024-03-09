@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let rpsGameResult = document.createElement("p");
     rpsOutput.appendChild(rpsGameResult);
+    rpsGameResult.classList.add("RESULT")
 
     let usrWins = document.createElement ("p");
     rpsOutput.appendChild(usrWins);
