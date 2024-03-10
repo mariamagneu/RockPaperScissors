@@ -63,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function playGame() {
+        if (userWins >= 5 || computerWins >= 5) {
+            endGame();
+            return;
+        } 
         function getComputerChoice() {
             randomIndex = Math.floor(Math.random() * choices.length);
             return choices[randomIndex];
@@ -76,14 +80,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 return "You lost! :(";
             }
         }
-
+    
         let playerSelection = getUserChoice;
         let computerSelection = getComputerChoice();
         let roundResult = playRound(playerSelection, computerSelection);
 
         cptrSelection.textContent = "Computer chose: " + computerSelection;
         usrSelection.textContent = "You chose: " + playerSelection;
-
         rpsRoundResult.textContent = roundResult ;
 
 
@@ -96,16 +99,25 @@ document.addEventListener("DOMContentLoaded", function() {
         usrWins.textContent ="User Wins: " + userWins;
         cptrWins.textContent = "Computer Wins: " + computerWins;
         rpsGameResult.textContent = winEndGame();
-
     }
-    function winEndGame() {
-        if (userWins >= 5) {
-            rpsGameResult.textContent = "YOU WON THE WHOLE GAME! CONGRATS"
-            return "YOU WON THE WHOLE GAME! CONGRATS"
-        } else if (computerWins >= 5) {
-            rpsGameResult.textContent = "The computer won this GAME";
-            return "The computer won this GAME";
 
-        }
-        }
+function winEndGame() {
+    if (userWins >= 5) {
+        rpsGameResult.textContent = "YOU WON THE WHOLE GAME! CONGRATS"
+        endGame();
+        return "YOU WON THE WHOLE GAME! CONGRATS"
+
+    } else if (computerWins >= 5) {
+        rpsGameResult.textContent = "The computer won this GAME";
+        endGame();
+        return "The computer won this GAME";
+    }  
+}
+
+function endGame() {
+    rpsGameResult.textContent = winEndGame();
+    rockBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    paperBtn.disabled = true;
+}
 });
